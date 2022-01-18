@@ -111,7 +111,8 @@ class Migration(object):
         self.add(self.changes.pk_constraints(creations_only=True))
         self.add(self.changes.non_pk_constraints(creations_only=True))
 
-        self.add(self.changes.non_table_selectable_creations())
+        # Offendor below
+        self.add(formatter.prepend_drops_for_replacements(self.changes.non_table_selectable_creations()))
         self.add(self.changes.mv_indexes(creations_only=True))
 
         if privileges:
